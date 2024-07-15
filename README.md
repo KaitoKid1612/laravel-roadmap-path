@@ -1,66 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Test Your Laravel Blade Skills
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This repository is a test for you: perform a set of tasks listed below, and fix the PHPUnit tests, which are currently intentionally failing.
 
-## About Laravel
+To test if all the functions work correctly, there are PHPUnit tests in `tests/Feature/ViewsTest.php` file.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+In the very beginning, if you run `php artisan test`, or `vendor/bin/phpunit`, all 8 tests fail.
+Your task is to make those tests pass.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## How to Submit Your Solution
 
-## Learning Laravel
+If you want to submit your solution, you should make a Pull Request to the `main` branch.
+It will automatically run the tests via Github Actions and will show you/me if the test pass.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+If you don't know how to make a Pull Request, [here's my video with instructions](https://www.youtube.com/watch?v=vEcT6JIFji0).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+This task is mostly self-served, so I'm not planning review or merge the Pull Requests. This test is for yourselves to assess your skills, the automated tests will be your answer if you passed the test :)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Questions / Problems?
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+If you're struggling with some of the tasks, or you have suggestions how to improve the task, create a Github Issue.
 
-### Premium Partners
+Good luck!
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## Task 1. Passing Data to Views.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+File `app/Http/Controllers/HomeController.php`, method `users()`, pass the `$usersCount` to the View.
 
-## Code of Conduct
+Test method `test_users_list_get_with_values()`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Task 2. Prevent the XSS Attack.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+The page `/alert` will show you a JavaScript alert. You need to change something in `resources/views/alert.blade.php` file, so that this alert would not be thrown, and instead just its HTML would be shown.
 
-## License
+Test method `test_script_alert_does_not_fire_modal`.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## Task 3. Loop in the Table.
+
+The file `resources/views/table.blade.php` should show the loop of all users, or "No content" row, if no users are in the database.
+
+Test method `test_loop_shows_table_or_empty()`.
+
+---
+
+## Task 4. Styling Table Rows.
+
+Three sub-tasks related to the table and loop, all in file `resources/views/rows.blade.php`:
+
+- in the first column, add the row number: 1, 2, etc.
+- only every second row (2nd, 4th, etc) should have CSS class "bg-red-100"
+- only the FIRST row should have email column with "font-bold"
+
+Test method `test_rows_styled_with_number()`.
+
+---
+
+## Task 5. Logged-in User.
+
+In the file `resources/views/authenticated.blade.php`, show the appropriate text, if the user is/isn't logged in.
+
+If the user is logged in, show their email.
+
+Test method `test_authenticated()`.
+
+---
+
+## Task 6. Include File.
+
+In the file `resources/views/include.blade.php`, include another Blade file `resources/views/includes/row.blade.php`, passing the parameter correctly.
+
+Test method `test_include_row()`.
+
+---
+
+## Task 7. Global Variable.
+
+In the file `resources/views/layouts/app.blade.php`, there's a "global" variable `$metaTitle`. Pass its value to this view, for all pages, without touching any Controllers.
+
+Test method `test_meta_title()`.
+
+---
+
+## Task 8. Layouts.
+
+Change the file `resources/views/layout.blade` to extend the `layouts/main.blade.php` (without Blade components) instead of `layouts/app.blade.php` (with Blade components).
+
+Test method `test_layout()`.
